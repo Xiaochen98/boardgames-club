@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Puzzles in Pictures",
+    "players": "2–15",
+    "playtime": "Time: ––",
+    "description": "Party game. 15 pictures (all different) are placed round the room before the party starts. When guests arrive, they are encouraged to look at the pictures at some time during the party. The picture should suggest a well-known item to them. The one who gets the most right answers after an agreed time, wins.",
+    "link": "https://boardgamegeek.com/boardgame/random",
+    "image": "images\\Puzzles_in_Pictures.png"
+  },
+  {
+    "name": "Harmonies",
+    "players": "1–4",
+    "playtime": "30–45 Min",
+    "description": "In Harmonies, build landscapes by placing colored tokens and create habitats for your animals. To earn the most points and win the game, incorporate the habitats in your landscapes wisely and have as many animals as you can settle there.\n—description from the publisher",
+    "link": "https://boardgamegeek.com/boardgame/414317/harmonies",
+    "image": "images\\Harmonies.png"
+  },
+  {
+    "name": "Ark Nova",
+    "players": "1–4",
+    "playtime": "90–150 Min",
+    "description": "In Ark Nova, you will plan and design a modern, scientifically managed zoo. With the ultimate goal of owning the most successful zoological establishment, you will build enclosures, accommodate animals, and support conservation projects all over the world. Specialists and unique buildings will help you in achieving this goal.\nEach player has a set of five action cards to manage their gameplay, and the power of an action is determined by the slot the card currently occupies. The cards in question are:\nCARDS: Allows you to gain new zoo cards (animals, sponsors, and conservation project cards).\nBUILD: Allows you to build standard or special enclosures, kiosks, and pavilions.\nANIMALS: Allows you to accommodate animals in your zoo.\nASSOCIATION: Allows your association workers to carry out different tasks.\nSPONSORS: Allows you to play a sponsor card in your zoo or to raise money.",
+    "link": "https://boardgamegeek.com/boardgame/342942/ark-nova",
+    "image": "images\\Ark_Nova.png"
+  }
+]

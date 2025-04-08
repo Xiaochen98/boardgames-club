@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小黑猫桌游俱乐部</title>
+  <style>
+    body {
+      background-color: #f7f7f7;
+      font-family: Arial, sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #f9a825;
+      color: #000;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 2.5em;
+      font-weight: bold;
+      border-bottom: 3px solid #000;
+    }
+
+    .content {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .game-card {
+      width: 200px;
+      margin: 15px;
+      background-color: #fff;
+      border: 2px solid #000;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+
+    .game-card img {
+      width: 100%;
+      border-bottom: 2px solid #000;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .game-card .game-info {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .game-card .game-info h3 {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    .game-card .game-info p {
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    .game-card .game-info .game-players,
+    .game-card .game-info .game-time {
+      font-weight: bold;
+    }
+
+    .filter {
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .filter select {
+      padding: 8px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .game-details {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 60%;
+      max-height: 70%;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .game-details img {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .game-details h3 {
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+
+    .game-details .description {
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .game-details .details {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+
+    .close-btn {
+      background-color: #f9a825;
+      border: none;
+      padding: 10px 15px;
+      color: #fff;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .game-details {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 60%;
+      max-height: 80%;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .details-container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    .image-container img {
+      width: 200px;
+      border-radius: 10px;
+    }
+
+    .text-container {
+      flex-grow: 1;
+    }
+
+    .text-container h3 {
+      font-size: 2em;
+      margin-top: 0;
+    }
+
+    .text-container .description {
+      font-size: 1em;
+      margin: 10px 0;
+    }
+
+    .text-container a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #f9a825;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <header>小黑猫桌游俱乐部</header>
+
+  <div class="filter">
+    <select id="player-filter">
+      <option value="all">所有玩家</option>
+      <option value="1">1 玩家</option>
+      <option value="2">2 玩家</option>
+      <option value="3">3 玩家</option>
+      <option value="4">4 玩家</option>
+      <option value="5">5 玩家</option>
+    </select>
+    <select id="time-filter">
+      <option value="all">所有时间</option>
+      <option value="30">30 分钟</option>
+      <option value="60">60 分钟</option>
+      <option value="90">90 分钟</option>
+      <option value="120">120 分钟</option>
+    </select>
+  </div>
+
+  <div class="content" id="game-cards-container">
+    <!-- Cards will be dynamically inserted here -->
+  </div>
+
+  <div class="game-details" id="game-details">
+    <div class="details-container">
+      <div class="image-container">
+        <img id="game-image" src="" alt="游戏图片">
+      </div>
+      <div class="text-container">
+        <h3 id="game-name"></h3>
+        <p id="game-players"></p>
+        <p id="game-time"></p>
+        <div class="description" id="game-description"></div>
+        <a id="game-link" href="" target="_blank">访问游戏页面</a>
+        <button class="close-btn" id="close-btn">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 从本地的 JSON 文件加载桌游数据
+    async function loadBoardGames() {
+      const response = await fetch('boardgames.json');
+      const data = await response.json();
+      generateGameCards(data);
+    }
+
+    // 生成游戏卡片
+    function generateGameCards(games) {
+      const container = document.getElementById('game-cards-container');
+      container.innerHTML = ''; // 清空内容
+
+      games.forEach(game => {
+        const card = document.createElement('div');
+        card.classList.add('game-card');
+        card.addEventListener('click', () => showGameDetails(game));
+
+        card.innerHTML = `
+          <img src="${game.image}" alt="${game.name}">
+          <div class="game-info">
+            <h3>${game.name}</h3>
+            <p class="game-players">玩家: ${game.players}</p>
+            <p class="game-time">时间: ${game.playtime}</p>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // 显示游戏详情
+    function showGameDetails(game) {
+      document.getElementById('game-image').src = game.image;
+      document.getElementById('game-name').textContent = game.name;
+      document.getElementById('game-players').textContent = `玩家: ${game.players}`;
+      document.getElementById('game-time').textContent = `时间: ${game.playtime}`;
+      document.getElementById('game-description').textContent = game.description;
+      document.getElementById('game-link').href = game.link;
+
+      document.getElementById('game-details').style.display = 'block';
+    }
+
+    // 关闭详情窗口
+    document.getElementById('close-btn').addEventListener('click', () => {
+      document.getElementById('game-details').style.display = 'none';
+    });
+
+    // 筛选功能
+    document.getElementById('player-filter').addEventListener('change', filterGames);
+    document.getElementById('time-filter').addEventListener('change', filterGames);
+
+    function filterGames() {
+      const playerFilter = document.getElementById('player-filter').value;
+      const timeFilter = document.getElementById('time-filter').value;
+
+      const filteredGames = boardgamesWithImages.filter(game => {
+        const playersMatch = playerFilter === 'all' || game.players.includes(playerFilter);
+        const timeMatch = timeFilter === 'all' || game.playtime.includes(timeFilter);
+        return playersMatch && timeMatch;
+      });
+
+      generateGameCards(filteredGames);
+    }
+
+    // 初始加载游戏
+    loadBoardGames();
+  </script>
+</body>
+
+</html>
